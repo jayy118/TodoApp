@@ -8,46 +8,56 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// v03
 @RestController
 @RequestMapping("test")
 public class TestController {
     @GetMapping("/testGetMapping")
-    public String testController(){
-        return "Hello World!, 이재현";
+    public String testController() {
+        return "Hello World, 최승훈";
     }
 
     @GetMapping("/{id}")
-    public String testControllerWithPathVariables(@PathVariable(required = false) int id){
-        return "Hello World! ID" + id;
+    public String testControllerWithPathVariables(@PathVariable(required=false) int id) {
+        return "Hello World, 최승훈" + id;
     }
 
     @GetMapping("/testRequestParam")
-    public String testControllerRequestParam(@RequestParam(required = false) int id) {
-        return "Hello World! ID" + id;
+    public String testControllerWithRequestParam(@RequestParam(required=false) int id) {
+        return "Hello World, 최승훈" + id;
     }
 
     @GetMapping("/testRequestBody")
-    public String testControllerRequestBody(@RequestBody TestRequestBodyDTO testRequestBodyDTO) {
-        return "Hello World! ID" + testRequestBodyDTO.getId() + " Message : " + testRequestBodyDTO.getMessage();
+    public String testControllerWithRequestParam(@RequestBody TestRequestBodyDTO testRequestBodyDTO) {
+        return "Hello World, 최승훈. id: " + testRequestBodyDTO.getId() + ", message: "
+                + testRequestBodyDTO.getMessage();
     }
 
     @GetMapping("/testResponseBody")
-    public ResponseDTO<String> testControllerResponseBody(){
+    public ResponseDTO<String> testControllerResposeBody() {
         List<String> list = new ArrayList<>();
-        list.add("Hello World! I'm ResponseDTO");
+        list.add("csh");
+        list.add("csh2");
+        list.add("csh3");
+
         ResponseDTO<String> response = ResponseDTO.<String>builder().data(list).build();
+
         return response;
+
     }
 
     @GetMapping("/testResponseEntity")
-    public ResponseEntity<?> testControllerResponseEntity(){
+    public ResponseEntity<?> testControllerResposeEntity() {
         List<String> list = new ArrayList<>();
-        list.add("ljh");
-        list.add("ljh2");
-        list.add("ljh3");
+        list.add("csh");
+        list.add("csh2");
+        list.add("csh3");
 
         ResponseDTO<String> response = ResponseDTO.<String>builder().data(list).build();
 
         return ResponseEntity.ok().body(response);
+        //return ResponseEntity.badRequest().body(response);
+
     }
 }

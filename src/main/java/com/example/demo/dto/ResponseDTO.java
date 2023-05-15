@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -15,3 +16,7 @@ public class ResponseDTO<T> {
     private String error;
     private List<T> data;
 }
+
+
+// new ResposeDTD<String>
+// new ResposeDTO<TodoDTO>
