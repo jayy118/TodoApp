@@ -23,12 +23,12 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private TokenProvider tokenProvider;
-    
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, 
-            HttpServletResponse response, FilterChain filterChain) 
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
+
         try {
             String token = parseBearerToken(request);
             log.info("Filter is running...");
@@ -49,13 +49,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 securityContext.setAuthentication(authentication);
                 SecurityContextHolder.setContext(securityContext);
             }
-            
+
         } catch (Exception ex) {
             logger.error("Could not set user authentication in security context", ex);
         }
 
         filterChain.doFilter(request, response);
-        
+
     }
 
     private String parseBearerToken(HttpServletRequest request) {
